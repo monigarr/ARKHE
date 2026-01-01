@@ -48,10 +48,10 @@ The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework d
   
 ---
 
-- 🌐 **Streamlit Dashboard**: Interactive web application with 5 pages
+- 🌐 **Streamlit Dashboard**: Interactive web application with 5 pages (including Health Check)
   - Sequence Explorer with real-time visualization
   - Model Inference interface
-  - Statistical Analysis dashboard
+  - Statistical Analysis dashboard`n  - Health Check monitoring page
   - Interactive charts and data export
 
   ![ARKHĒ Streamlit Screenshot](images/ARKHE_Screenshot_streamlit_dashboard.png)
@@ -71,7 +71,7 @@ The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework d
 - ✅ **Type Hints**: Full type annotation coverage
 - ✅ **Documentation**: 12+ comprehensive guides (~80KB+)
 - ✅ **Testing**: 40+ tests across 7 test files
-- ✅ **Code Quality**: Linting, formatting, and quality checks
+- ✅ **Code Quality**: Linting, formatting, and quality checks`n- ✅ **Health Monitoring**: Real-time system health checks and diagnostics
 - ✅ **Maintainability**: Clean architecture and design patterns
 
 ## Quick Start

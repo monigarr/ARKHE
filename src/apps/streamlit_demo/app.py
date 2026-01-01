@@ -52,6 +52,7 @@ try:
     from math_research.sequences import CollatzSequence
     from math_research.analysis import SequenceStatistics, SequenceVisualizer
     from math_research.ml import MultiBaseEncoder
+    from math_research.utils.health import HealthChecker, get_health_status
 except ImportError as e:
     st.error(f"""
     **Import Error**: Could not import math_research module.
@@ -120,7 +121,7 @@ def main():
     st.sidebar.markdown("---")
     
     # Page options
-    page_options = ["🏠 Home", "📊 Sequence Explorer", "🤖 Model Inference", "📈 Statistical Analysis", "⚙️ About"]
+    page_options = ["🏠 Home", "📊 Sequence Explorer", "🤖 Model Inference", "📈 Statistical Analysis", "🏥 Health Check", "⚙️ About"]
     
     # Get index of current page from session state
     try:
@@ -150,6 +151,8 @@ def main():
         show_model_inference()
     elif st.session_state.page == "📈 Statistical Analysis":
         show_statistical_analysis()
+    elif st.session_state.page == "🏥 Health Check":
+        show_health_check()
     elif st.session_state.page == "⚙️ About":
         show_about_page()
 
@@ -639,6 +642,134 @@ def show_statistical_analysis():
                 file_name=f"collatz_analysis_{start_range}_{end_range}.csv",
                 mime="text/csv"
             )
+
+
+def show_health_check():
+    """Display health check page."""
+    st.markdown('<div class="main-header">🏥 Health Check</div>', unsafe_allow_html=True)
+    
+    st.markdown("""
+    This page provides real-time health monitoring for the ARKHE Framework.
+    Use this to verify that all dependencies, modules, and system resources are functioning correctly.
+    """)
+    
+    # Refresh button
+    if st.button("🔄 Refresh Health Status", type="primary"):
+        st.rerun()
+    
+    # Run health checks
+    with st.spinner("Running health checks..."):
+        checker = HealthChecker()
+        health_status = checker.run_all_checks()
+    
+    # Overall status
+    overall_status = health_status["status"]
+    status_color = "🟢" if overall_status == "healthy" else "🔴"
+    st.markdown(f"### {status_color} Overall Status: {overall_status.upper()}")
+    st.markdown(f"**Timestamp:** {health_status['timestamp']}")
+    
+    st.markdown("---")
+    
+    # Individual checks
+    st.markdown("### Detailed Checks")
+    
+    checks = health_status["checks"]
+    
+    # PyTorch check
+    with st.expander("🔥 PyTorch", expanded=True):
+        pytorch = checks["pytorch"]
+        if pytorch["status"] == "healthy":
+            st.success("✅ PyTorch is installed and working")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Version", pytorch["version"])
+                st.metric("CUDA Available", "Yes" if pytorch["cuda_available"] else "No")
+            with col2:
+                if pytorch["cuda_available"]:
+                    st.metric("CUDA Version", pytorch.get("cuda_version", "N/A"))
+                    st.metric("GPU Devices", pytorch.get("device_count", 0))
+                    if pytorch.get("device_name"):
+                        st.info(f"Device: {pytorch['device_name']}")
+        else:
+            st.error(f"❌ PyTorch check failed: {pytorch.get('message', 'Unknown error')}")
+            if "error" in pytorch:
+                st.code(pytorch["error"])
+    
+    # NumPy check
+    with st.expander("🔢 NumPy"):
+        numpy = checks["numpy"]
+        if numpy["status"] == "healthy":
+            st.success(f"✅ NumPy version {numpy['version']}")
+        else:
+            st.error(f"❌ NumPy check failed: {numpy.get('message', 'Unknown error')}")
+    
+    # Pandas check
+    with st.expander("🐼 Pandas"):
+        pandas = checks["pandas"]
+        if pandas["status"] == "healthy":
+            st.success(f"✅ Pandas version {pandas['version']}")
+        else:
+            st.error(f"❌ Pandas check failed: {pandas.get('message', 'Unknown error')}")
+    
+    # Filesystem check
+    with st.expander("📁 Filesystem"):
+        fs = checks["filesystem"]
+        if fs["status"] == "healthy":
+            st.success("✅ All required directories are accessible")
+            for path_name, path_info in fs["paths"].items():
+                if path_info["status"] == "healthy":
+                    st.text(f"  ✅ {path_name}: writable")
+                else:
+                    st.error(f"  ❌ {path_name}: {path_info.get('error', 'not accessible')}")
+        else:
+            st.error("❌ Some directories are not accessible")
+            for path_name, path_info in fs["paths"].items():
+                if path_info["status"] == "unhealthy":
+                    st.error(f"  ❌ {path_name}: {path_info.get('error', 'not accessible')}")
+    
+    # Imports check
+    with st.expander("📦 Module Imports"):
+        imports = checks["imports"]
+        if imports["status"] == "healthy":
+            st.success("✅ All critical modules imported successfully")
+            for module_name, module_info in imports["modules"].items():
+                st.text(f"  ✅ {module_name}")
+        else:
+            st.error("❌ Some modules failed to import")
+            for module_name, module_info in imports["modules"].items():
+                if module_info["status"] == "healthy":
+                    st.text(f"  ✅ {module_name}")
+                else:
+                    st.error(f"  ❌ {module_name}: {module_info.get('error', 'import failed')}")
+    
+    # System check
+    with st.expander("💻 System Information"):
+        system = checks["system"]
+        if system["status"] == "healthy":
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**Platform:**")
+                st.text(f"{system['platform']} {system.get('platform_version', '')}")
+                st.markdown("**Python:**")
+                st.text(system["python_version"].split("\n")[0])
+            with col2:
+                if "memory" in system:
+                    st.markdown("**Memory:**")
+                    st.metric("Total", f"{system['memory']['total_gb']:.2f} GB")
+                    st.metric("Available", f"{system['memory']['available_gb']:.2f} GB")
+                    st.metric("Used", f"{system['memory']['percent_used']:.1f}%")
+                if "disk" in system:
+                    st.markdown("**Disk:**")
+                    st.metric("Total", f"{system['disk']['total_gb']:.2f} GB")
+                    st.metric("Free", f"{system['disk']['free_gb']:.2f} GB")
+                    st.metric("Used", f"{system['disk']['percent_used']:.1f}%")
+                if "note" in system:
+                    st.info(system["note"])
+    
+    # JSON export
+    st.markdown("---")
+    st.markdown("### Export Health Status")
+    st.json(health_status)
 
 
 def show_about_page():

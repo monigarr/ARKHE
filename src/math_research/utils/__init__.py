@@ -32,11 +32,15 @@ License: MIT
 
 from math_research.utils.logging import get_logger, setup_logging
 from math_research.utils.config import load_config, Config
+from math_research.utils.health import HealthChecker, get_health_status, is_healthy
 
 __all__ = [
     "get_logger",
     "setup_logging",
     "load_config",
     "Config",
+    "HealthChecker",
+    "get_health_status",
+    "is_healthy",
 ]
 
