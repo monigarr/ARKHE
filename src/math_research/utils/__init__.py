@@ -33,6 +33,12 @@ License: MIT
 from math_research.utils.logging import get_logger, setup_logging
 from math_research.utils.config import load_config, Config
 from math_research.utils.health import HealthChecker, get_health_status, is_healthy
+from math_research.utils.metrics import (
+    MetricsExporter,
+    get_metrics_exporter,
+    record_training_metric,
+    record_inference_latency,
+)
 
 __all__ = [
     "get_logger",
@@ -42,5 +48,9 @@ __all__ = [
     "HealthChecker",
     "get_health_status",
     "is_healthy",
+    "MetricsExporter",
+    "get_metrics_exporter",
+    "record_training_metric",
+    "record_inference_latency",
 ]
 

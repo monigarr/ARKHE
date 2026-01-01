@@ -150,6 +150,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+
+## [0.1.3] - 2025-01-09
+
+### Added
+
+#### Production Deployment & Monitoring
+- **Production Deployment Guide**: Comprehensive guide for production deployments
+  - Docker deployment instructions
+  - Configuration management
+  - Security best practices
+  - Scaling and performance optimization
+  - Backup and recovery procedures
+- **Metrics Export System**: Prometheus-compatible metrics export
+  - MetricsExporter class for application metrics
+  - Training metrics tracking
+  - Inference latency monitoring
+  - Counter and gauge metrics support
+  - Prometheus text format export
+
+### Changed
+
+#### Documentation
+- Updated src/math_research/utils/__init__.py to export metrics utilities
+- Enhanced production readiness with monitoring capabilities
+
+
 ## [0.1.1] - 2025-01-09
 
 ### Added
