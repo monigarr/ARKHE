@@ -8,6 +8,12 @@
 
 ## Overview
 
+ARKHĒ is an open research framework for studying first principles in rule-based systems where simple constraints give rise to complex structure.
+
+The project treats mathematical sequences, symbolic representations, and learning systems as objects of inspection rather than targets for optimization. Models are used as analytical probes, not authorities. Performance is measured only insofar as it helps expose structure, invariants, or failure modes.
+
+ARKHĒ is designed for transparency, reproducibility, and long-term relevance. It is not a demo platform, benchmark suite, or production system.
+
 The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework designed to support mathematical sequence research and machine learning experimentation. Inspired by Collatz conjecture research, the framework provides tools for:
 
 - **Sequence Generation**: Extensible framework for generating and analyzing mathematical sequences
@@ -459,10 +465,30 @@ For questions, issues, or contributions:
 - Review [documentation](docs/guides/)
 - Open an issue on GitHub
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
+- If you build upon or extend the framework, attribution is appreciated.
 
 ## Version History
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history and changes.
+
+---
+
+## How to Cite ARKHĒ
+
+If you use ARKHĒ in academic work, technical reports, or derivative research, please cite it as follows:
+
+**ARKHĒ Framework**  
+MoniGarr. *ARKHĒ: A Framework for First-Principle Analysis of Rule-Based Systems.*  
+GitHub repository: https://github.com/monigarr/ARKHE
+
+BibTeX:
+```bibtex
+@software{arkhe_framework,
+  author = {MoniGarr},
+  title = {ARKHĒ: A Framework for First-Principle Analysis of Rule-Based Systems},
+  year = {2026},
+  url = {https://github.com/monigarr/ARKHE}
+}
 
 ---
 
