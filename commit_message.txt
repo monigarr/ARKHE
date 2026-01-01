@@ -1,0 +1,32 @@
+feat: Add enterprise infrastructure components
+
+Add security policy, containerization, and CI/CD configuration to improve
+enterprise readiness and deployment capabilities.
+
+Security:
+- Add SECURITY.md with vulnerability reporting process
+- Define security contact and response time commitments
+- Include security best practices and known considerations
+
+Containerization:
+- Add multi-stage Dockerfile with 6 build targets (production, dev, streamlit, cuda)
+- Add docker-compose.yml with service profiles for different use cases
+- Add .dockerignore to optimize build context
+- Add comprehensive Docker setup guide in docs/guides/docker_setup.md
+
+Infrastructure:
+- Add .github/workflows for CI/CD automation
+- Add .gitignore and .dockerignore for proper file exclusions
+- Add .pre-commit-config.yaml for code quality checks
+
+Features:
+- Production-ready Docker images with non-root user
+- GPU/CUDA support for ML workloads
+- Streamlit web interface containerization
+- Development environment with hot-reload support
+- Profile-based service selection in docker-compose
+
+This commit addresses enterprise readiness gaps identified in the project
+analysis and provides standardized deployment options.
+
+Related: Enterprise readiness improvements

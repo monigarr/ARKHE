@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Production CLI service
+  arkhe-cli:
+    build:
+      context: .
+      target: production
+    image: arkhe:latest
+    container_name: arkhe-cli
+    volumes:
+      - ./data:/data
+      - ./checkpoints:/checkpoints
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "-m", "src.apps.cli", "--help"]
+    profiles:
+      - cli
+
+  # Streamlit web interface
+  arkhe-streamlit:
+    build:
+      context: .
+      target: streamlit
+    image: arkhe:streamlit
+    container_name: arkhe-streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/data
+      - ./checkpoints:/checkpoints
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    command: ["streamlit", "run", "src/apps/streamlit_demo/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    profiles:
+      - streamlit
+
+  # Development environment
+  arkhe-dev:
+    build:
+      context: .
+      target: development
+    image: arkhe:dev
+    container_name: arkhe-dev
+    volumes:
+      - .:/app
+      - ./data:/data
+      - ./checkpoints:/checkpoints
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=development
+    command: ["tail", "-f", "/dev/null"]
+    profiles:
+      - dev
+
+  # GPU-enabled service (requires NVIDIA Docker runtime)
+  arkhe-gpu:
+    build:
+      context: .
+      target: cuda
+    image: arkhe:cuda
+    container_name: arkhe-gpu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - ./data:/data
+      - ./checkpoints:/checkpoints
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - NVIDIA_VISIBLE_DEVICES=all
+    command: ["python3", "-m", "src.apps.cli", "--help"]
+    profiles:
+      - gpu
+
+volumes:
+  data:
+  checkpoints:
