@@ -43,13 +43,16 @@ The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework d
   - Model Inference interface
   - Statistical Analysis dashboard
   - Interactive charts and data export
+
   ![ARKHĒ Streamlit Screenshot](images/ARKHE_Screenshot_streamlit_dashboard.png)
+
   ![ARKHĒ Streamlit Screenshare](videos/ARKHE_Screenshare_Streamlit_Dashboard.mp4)
 
 ---
 
 - 📓 **Jupyter Notebooks**: 3 complete notebooks with working examples
-  ![ARKHĒ Jupyter Notebooks](videos/ARKHE_Screenshare_Streamlit_Dashboard.mp4)
+
+  ![ARKHĒ Jupyter Notebooks](videos/ARKHE_03_transformer_training.mp4)
 
 ---
 
