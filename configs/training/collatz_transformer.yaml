@@ -1,0 +1,41 @@
+# Collatz Transformer Training Configuration
+# Based on "Transformers know more than they can tell: Learning the Collatz sequence"
+
+model:
+  name: collatz_transformer
+  d_model: 512
+  nhead: 8
+  num_layers: 6
+  dim_feedforward: 2048
+  dropout: 0.1
+  activation: relu
+
+training:
+  batch_size: 64
+  learning_rate: 0.0001
+  num_epochs: 100
+  weight_decay: 0.01
+  warmup_steps: 1000
+  gradient_clip: 1.0
+  
+data:
+  train_range: [1, 10**10]  # Training range for odd integers
+  test_range: [10**10, 10**12]  # Test range
+  base: 24  # Optimal base from paper (or 32)
+  num_train_samples: 300000
+  num_test_samples: 10000
+  seed: 42
+
+encoding:
+  bases: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 24, 32, 57]  # Bases to test
+  max_length: 50  # Maximum sequence length
+
+evaluation:
+  metrics: [accuracy, exact_match, k_error, k_prime_error]
+  save_predictions: true
+  
+checkpointing:
+  save_every_n_epochs: 10
+  save_best: true
+  monitor_metric: accuracy
+

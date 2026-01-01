@@ -1,0 +1,20 @@
+# Include production requirements
+-r requirements.txt
+
+# Development Tools
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.5.0
+pre-commit>=3.4.0
+
+# Documentation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0
+
+# Optional UI (uncomment if needed)
+# streamlit>=1.25.0
+# gradio>=3.40.0
+

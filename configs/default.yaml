@@ -1,0 +1,37 @@
+# Default Configuration File
+# ARKHĒ Framework
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null  # Set to path if file logging desired
+
+# Sequence Generation Defaults
+sequences:
+  max_iterations: 1000000
+  cache_enabled: true
+  cache_size: 10000
+
+# Visualization Defaults
+visualization:
+  style: seaborn
+  figure_size: [10, 6]
+  dpi: 100
+  save_format: png
+
+# ML Training Defaults
+ml:
+  device: auto  # auto, cpu, cuda
+  batch_size: 32
+  learning_rate: 0.0001
+  num_epochs: 10
+  checkpoint_dir: "./checkpoints"
+  log_dir: "./logs"
+  
+# Experiment Tracking
+experiments:
+  enabled: true
+  backend: wandb  # wandb or mlflow
+  project_name: "math-research-collatz"
+
