@@ -1,0 +1,12 @@
+# Sphinx build directory
+_build/
+_builds/
+
+# Generated documentation
+*.doctrees
+
+# Static files (if any)
+_static/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/

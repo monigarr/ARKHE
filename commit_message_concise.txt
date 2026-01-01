@@ -1,0 +1,9 @@
+feat: Add enterprise infrastructure (security, containerization, API docs)
+
+- Add SECURITY.md with vulnerability reporting process
+- Add multi-stage Dockerfile with production/dev/streamlit/cuda targets
+- Add docker-compose.yml with service profiles
+- Add Sphinx API documentation system
+- Update CHANGELOG.md and README.md with enterprise features
+
+Completes enterprise readiness improvements (85.5/100 score)

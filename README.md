@@ -4,7 +4,11 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)                                                          
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)                                                     
 [![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/monigarr/ARKHE.git)
+[![Security Policy](https://img.shields.io/badge/security-policy-blue.svg)](SECURITY.md)
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
 
 ## Overview
 
@@ -131,6 +135,23 @@ python -m src.apps.cli analyze --start 1 --end 100 --output analysis.json
 ```
 
 #### Streamlit Web Application
+
+
+### Docker Deployment
+
+```bash
+# Build and run with Docker Compose
+docker-compose --profile streamlit up    # Web interface
+docker-compose --profile cli run arkhe-cli python -m src.apps.cli generate --start 27
+docker-compose --profile dev up -d      # Development environment
+
+# Or use Docker directly
+docker build -t arkhe:latest .
+docker run --rm arkhe:latest python -m src.apps.cli --help
+```
+
+See [Docker Setup Guide](docs/guides/docker_setup.md) for complete instructions.
+
 
 ```bash
 # Launch interactive web interface
@@ -398,13 +419,14 @@ Key insights:
 
 ## Statistics
 
-- **38 Python source files** in `src/`
+- **38 Python source files** in src/
 - **7 test files** with **40+ test functions**
 - **3 Jupyter notebooks** with complete examples
 - **12+ documentation files** (~80KB+)
 - **4 CLI commands** fully functional
 - **5 Streamlit pages** interactive
 - **Comprehensive test coverage** for all major components
+- **Enterprise infrastructure**: Security policy, containerization, CI/CD, API docs
 
 ## License
 
@@ -493,3 +515,8 @@ BibTeX:
 ---
 
 **Note:** This is a research framework designed for mathematical exploration and ML experimentation. It prioritizes interpretability and research insights over production deployment optimization.
+
+
+
+
+

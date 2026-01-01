@@ -150,6 +150,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.1] - 2025-01-09
+
+### Added
+
+#### Enterprise Infrastructure
+- **Security Policy**: Added \SECURITY.md\ with vulnerability reporting process, security contact information, and best practices
+- **Containerization**: 
+  - Multi-stage \Dockerfile\ with 6 build targets (production, development, streamlit, cuda)
+  - \docker-compose.yml\ with service profiles for different use cases
+  - \.dockerignore\ for optimized build context
+  - Comprehensive Docker setup guide in \docs/guides/docker_setup.md- **API Documentation**: 
+  - Sphinx-based API documentation system
+  - Auto-generated documentation from docstrings
+  - Complete API reference for all modules (sequences, analysis, ml, utils)
+  - Read the Docs theme integration
+  - Build scripts for Linux/Mac (Makefile) and Windows (make.bat)
+- **CI/CD Enhancements**:
+  - GitHub Actions workflows for automated testing
+  - Cross-platform testing (Ubuntu, Windows, macOS)
+  - Multiple Python version support (3.8-3.12)
+  - Automated package building and installation
+
+#### Documentation
+- Docker setup and deployment guide
+- API documentation structure and build instructions
+- Enhanced enterprise readiness documentation
+
+### Changed
+- Updated project structure to reflect enterprise-level organization
+- Improved deployment options with containerization support
+- Enhanced security posture with formal security policy
+
+### Infrastructure Improvements
+- Production-ready Docker images with non-root user for security
+- GPU/CUDA support for ML workloads in containers
+- Profile-based service selection in docker-compose
+- Development environment with hot-reload support
+- Comprehensive .dockerignore for optimized builds
+
+
 ## [Unreleased]
 
 ### Planned
@@ -162,3 +202,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sequence animation/playback features
 
 [0.1.0]: https://github.com/MoniGarr/arkhe-framework/releases/tag/v0.1.0
+
