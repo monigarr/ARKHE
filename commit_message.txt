@@ -1,21 +1,34 @@
-fix: Correct duration check in RequestLogger.log_response
+docs: Update documentation to reflect latest features and version 0.1.4
 
-Fix bug where duration=0.0 (valid measurement for fast operations) was
-incorrectly treated as falsy, causing duration to be omitted from log messages.
+Update all user-facing documentation to include the latest enterprise
+infrastructure features and ensure version numbers are current.
 
-The original code used `if duration` which evaluates to False when
-duration=0.0, preventing valid zero-duration measurements from being
-logged. Changed to `if duration is not None` to correctly distinguish
-between "duration provided" (including 0.0) and "duration omitted" (None).
-
-Changes:
-- Replace ternary expression with explicit if/else for clarity
-- Change condition from `if duration` to `if duration is not None`
-- Ensure duration=0.0 is correctly included in log messages
-- Maintain backward compatibility (duration=None still omits timing)
+Documentation Updates:
+- Update CHANGELOG.md with version 0.1.4
+  - Document distributed tracing and enhanced observability features
+  - Document observability guide addition
+  - Document dependency updates (OpenTelemetry, Sentry)
+  - Document bug fix for RequestLogger duration check
+- Update README.md version badge from 0.1.0 to 0.1.4
+  - Reflects current project version
+- Update docs/guides/getting_started.md
+  - Add Health Check page mention in Streamlit section
+  - Add new "Observability & Monitoring" section
+  - Link to observability guide for detailed information
+  - Document health monitoring capabilities
 
 Files Modified:
-- src/math_research/utils/observability.py
+- CHANGELOG.md
+- README.md
+- docs/guides/getting_started.md
 
-This fix ensures that all valid duration measurements, including zero-
-duration operations, are properly logged with timing information.
+This commit ensures all documentation accurately reflects:
+- Current version (0.1.4)
+- All implemented enterprise features
+- New observability and monitoring capabilities
+- Health check functionality
+- Complete feature set for users
+
+All documentation is now synchronized with the current state of the
+ARKHE Framework and ready for users to discover and use all available
+features.

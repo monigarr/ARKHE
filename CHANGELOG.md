@@ -151,6 +151,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 
+
+## [0.1.4] - 2025-01-09
+
+### Added
+
+#### Distributed Tracing & Enhanced Observability
+- **Distributed Tracing**: OpenTelemetry-based distributed tracing system
+  - TracingManager class for span creation and management
+  - Support for multiple exporters (OTLP, Console, Jaeger, Zipkin)
+  - Function decorator for automatic tracing
+  - Span attributes and context propagation
+- **Enhanced Observability**:
+  - RequestLogger for request/response logging with timing
+  - PerformanceProfiler for function execution profiling
+  - ErrorTracker with Sentry integration for error tracking
+  - ObservabilityManager unified interface for all observability features
+- **Observability Guide**: Comprehensive documentation (docs/guides/observability.md)
+  - Distributed tracing setup and usage
+  - Request/response logging examples
+  - Performance profiling guide
+  - Error tracking configuration
+  - Integration examples
+
+### Changed
+
+#### Dependencies
+- Updated equirements-dev.txt with observability tools
+  - opentelemetry-api>=1.20.0
+  - opentelemetry-sdk>=1.20.0
+  - opentelemetry-exporter-otlp>=1.20.0
+  - sentry-sdk>=1.32.0
+- Updated src/math_research/utils/__init__.py to export tracing and observability utilities
+
+### Fixed
+
+#### Observability
+- Fixed RequestLogger.log_response duration check to correctly handle duration=0.0
+  - Changed from if duration to if duration is not None
+  - Ensures zero-duration operations are properly logged
+
+
 ## [0.1.3] - 2025-01-09
 
 ### Added

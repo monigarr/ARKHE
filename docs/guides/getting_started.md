@@ -140,7 +140,7 @@ streamlit run src/apps/streamlit_demo/app.py
 Then open your browser to `http://localhost:8501` to:
 - Generate and visualize sequences interactively
 - Train and monitor models
-- Analyze patterns across multiple sequences
+- Analyze patterns across multiple sequences`n- Monitor system health with Health Check page
 
 ## Next Steps
 
@@ -148,6 +148,19 @@ Then open your browser to `http://localhost:8501` to:
 2. **Read Documentation**: See `docs/guides/` for detailed guides
 3. **API Reference**: See `docs/api/` for complete API documentation
 4. **Training Guide**: See `docs/guides/training_guide.md` for ML workflows
+
+
+## Observability & Monitoring
+
+The framework includes comprehensive observability features:
+
+- **Health Checks**: Monitor system status via Streamlit Health Check page
+- **Distributed Tracing**: Track operations with OpenTelemetry
+- **Performance Profiling**: Profile function execution times
+- **Error Tracking**: Integrate with Sentry for error monitoring
+
+See the [Observability Guide](observability.md) for detailed information.
+
 
 ## Getting Help
 
