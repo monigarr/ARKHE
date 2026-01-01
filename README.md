@@ -16,7 +16,9 @@ ARKHĒ is an open research framework for studying first principles in rule-based
 
 The project treats mathematical sequences, symbolic representations, and learning systems as objects of inspection rather than targets for optimization. Models are used as analytical probes, not authorities. Performance is measured only insofar as it helps expose structure, invariants, or failure modes.
 
-ARKHĒ is designed for transparency, reproducibility, and long-term relevance. It is not a demo platform, benchmark suite, or production system.
+ARKHĒ is designed for transparency, reproducibility, and long-term relevance. It is not a demo platform, benchmark suite, or production system. 
+
+ARKHĒ follows production-grade engineering standards where they support research integrity, reproducibility, and auditability.
 
 The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework designed to support mathematical sequence research and machine learning experimentation. Inspired by Collatz conjecture research, the framework provides tools for:
 
