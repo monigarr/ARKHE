@@ -139,9 +139,13 @@ class RequestLogger:
                 response_log["response"] = response_data
         
         log_level = logging.ERROR if error else self.log_level
+        if duration is not None:
+            log_message = f"Response: {context.get('method')} {context.get('path')} - {status} ({duration:.3f}s)"
+        else:
+            log_message = f"Response: {context.get('method')} {context.get('path')} - {status}"
         logger.log(
             log_level,
-            f"Response: {context.get('method')} {context.get('path')} - {status} ({duration:.3f}s)" if duration else f"Response: {context.get('method')} {context.get('path')} - {status}",
+            log_message,
             extra={"response_context": response_log}
         )
 
