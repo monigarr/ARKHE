@@ -56,13 +56,9 @@ The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework d
 
   ![ARKHĒ Streamlit Screenshot](images/ARKHE_Screenshot_streamlit_dashboard.png)
 
-  ![ARKHĒ Streamlit Screenshare](videos/ARKHE_Screenshare_Streamlit_Dashboard.mp4)
-
 ---
 
 - 📓 **Jupyter Notebooks**: 3 complete notebooks with working examples
-
-  ![ARKHĒ Jupyter Notebooks](videos/ARKHE_03_transformer_training.mp4)
 
 ---
 
@@ -71,7 +67,7 @@ The **ARKHĒ FRAMEWORK** is a comprehensive, enterprise-level Python framework d
 - ✅ **Type Hints**: Full type annotation coverage
 - ✅ **Documentation**: 12+ comprehensive guides (~80KB+)
 - ✅ **Testing**: 40+ tests across 7 test files
-- ✅ **Code Quality**: Linting, formatting, and quality checks`n- ✅ **Health Monitoring**: Real-time system health checks and diagnostics`n- ✅ **Production Deployment**: Comprehensive deployment guide with Docker, monitoring, and security best practices`n- ✅ **Metrics Export**: Prometheus-compatible metrics for production monitoring
+- ✅ **Code Quality**: Linting, formatting, and quality checks`n- ✅ **Health Monitoring**: Real-time system health checks and diagnostics`n- ✅ **Production Deployment**: Comprehensive deployment guide with Docker, monitoring, and security best practices`n- ✅ **Metrics Export**: Prometheus-compatible metrics for production monitoring`n- ✅ **Distributed Tracing**: OpenTelemetry-based tracing for request/operation tracking`n- ✅ **Enhanced Observability**: Request logging, performance profiling, and error tracking
 - ✅ **Maintainability**: Clean architecture and design patterns
 
 ## Quick Start

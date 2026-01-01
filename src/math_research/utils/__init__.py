@@ -39,6 +39,18 @@ from math_research.utils.metrics import (
     record_training_metric,
     record_inference_latency,
 )
+from math_research.utils.tracing import (
+    TracingManager,
+    get_tracing_manager,
+    trace_function,
+)
+from math_research.utils.observability import (
+    ObservabilityManager,
+    RequestLogger,
+    PerformanceProfiler,
+    ErrorTracker,
+    get_observability_manager,
+)
 
 __all__ = [
     "get_logger",
@@ -52,5 +64,13 @@ __all__ = [
     "get_metrics_exporter",
     "record_training_metric",
     "record_inference_latency",
+    "TracingManager",
+    "get_tracing_manager",
+    "trace_function",
+    "ObservabilityManager",
+    "RequestLogger",
+    "PerformanceProfiler",
+    "ErrorTracker",
+    "get_observability_manager",
 ]
 
