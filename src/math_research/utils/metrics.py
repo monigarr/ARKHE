@@ -109,6 +109,13 @@ class MetricsExporter:
             # Keep only last 1000 values
             if len(metric["values"]) > 1000:
                 metric["values"] = metric["values"][-1000:]
+                
+                # Recalculate statistics based on retained values only
+                # This ensures count, sum, min, and max remain accurate after truncation
+                metric["count"] = len(metric["values"])
+                metric["sum"] = sum(metric["values"])
+                metric["min"] = min(metric["values"]) if metric["values"] else float("inf")
+                metric["max"] = max(metric["values"]) if metric["values"] else 0.0
     
     def record_counter(self, name: str, value: int = 1, labels: Optional[Dict[str, str]] = None) -> None:
         """

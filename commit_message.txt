@@ -1,42 +1,29 @@
-feat: Enhance attention specialization analysis and add MLP specialization probes
+fix: Correct metrics statistics after truncation in MetricsExporter
 
-This commit significantly improves the attention specialization breakdown notebook
-and adds a new MLP activation specialization analysis.
+This commit fixes a bug in `record_inference_latency()` where statistics
+(count, sum, min, max) were not recalculated after truncating the values
+list to keep only the last 1000 entries. This caused increasingly inaccurate
+average latency calculations as the number of recorded values exceeded 1000.
 
-## Attention Analysis Improvements
+## Bug Fix
 
-- **Model Training**: Added minimal training (2 epochs) for probe models to establish
-  non-random structure while maintaining "probe, not optimizer" philosophy
-- **Row Normalization**: Implemented per-feature row normalization (each row sums to 1)
-  to make head preference visible, following standard mechanistic interpretability practices
-- **Collapse Delta Panel**: Added visual collapse delta panel showing (Base 32 - Base 8)
-  to directly demonstrate encoding-induced collapse without rhetoric
-- **Enhanced Visualization**: Improved figure with color bars, better typography, feature
-  names as y-axis labels, and summary statistics
-
-## MLP Specialization Analysis (New)
-
-- **MLP Activation Extraction**: Implemented forward hooks on `encoder_layer.linear1` to
-  capture MLP activations (output before activation function)
-- **Feature-Conditioned Variance Metric**: Created `compute_mlp_specialization()` function
-  that measures variance ratio between feature-active and feature-inactive tokens
-- **Cross-Base Comparison**: Added analysis loop to compute MLP specialization across all
-  encoding bases (32, 24, 16, 8)
-- **MLP Visualization**: Created heatmap visualization with dimension binning, row
-  normalization, and collapse delta panel, using YlOrRd colormap for specialization
-  patterns
+- **Metrics Truncation**: When `values` list exceeds 1000 items, statistics
+  are now recalculated from the retained values only
+- **Accurate Statistics**: `count`, `sum`, `min`, and `max` are now correctly
+  updated after truncation, ensuring accurate average calculations
+- **Edge Case Handling**: Properly handles empty values list after truncation
 
 ## Technical Details
 
-- MLP analysis uses d_ff dimensions (typically 4*d_model) from linear1 output
-- Dimensions are binned into 32 bins for visualization
-- Specialization score = active_variance / (inactive_variance + epsilon)
-- All visualizations follow research-grade standards for mechanistic interpretability
+- Before: Truncation removed old values but kept stale statistics
+- After: Statistics are recalculated from retained values after truncation
+- Impact: Fixes `sum / count` average calculation accuracy for long-running
+  applications that record more than 1000 inference latencies
 
 ## Files Modified
 
-- `src/notebooks/04_attention_specialization_breakdown.ipynb`: Enhanced attention analysis
-  and added complete MLP specialization analysis section
+- `src/math_research/utils/metrics.py`: Fixed `record_inference_latency()`
+  to recalculate statistics after truncation
 
-This work enables direct comparison between attention and MLP specialization patterns
-under encoding-induced aliasing, providing comprehensive evidence for the collapse claim.
+This fix ensures that Prometheus-compatible metrics remain accurate even
+after extended operation periods with high inference volumes.

@@ -418,5 +418,8 @@ for inputs, targets in train_loader:
 
 - See [Usage Examples](usage_examples.md) for more code examples
 - Check the training notebook: `src/notebooks/03_transformer_training.ipynb`
+- Analyze model interpretability: `src/notebooks/04_attention_specialization_breakdown.ipynb`
+  - Explore attention and MLP specialization patterns
+  - Understand encoding-induced collapse under aliasing
 - Review [API Documentation](../api/) for detailed API reference
 

@@ -152,6 +152,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.1.5] - 2025-01-09
+
+### Added
+
+#### Model Interpretability Analysis
+- **Enhanced Attention Specialization Analysis**:
+  - Model training for probe models (2 epochs) to establish non-random structure
+  - Row normalization per feature (each row sums to 1) for clear head preference visualization
+  - Collapse delta panel showing (Base 32 - Base 8) to visually demonstrate encoding-induced collapse
+  - Enhanced visualization with color bars, improved typography, and summary statistics
+- **MLP Specialization Analysis** (new):
+  - MLP activation extraction via forward hooks on `encoder_layer.linear1`
+  - Feature-conditioned activation variance metric
+  - Specialization score calculation (active_variance / inactive_variance)
+  - Cross-base comparison across encoding resolutions (32, 24, 16, 8)
+  - Visualization with dimension binning, row normalization, and collapse delta panel
+  - YlOrRd colormap for specialization patterns, RdBu_r for collapse delta
+
+#### Jupyter Notebooks
+- **04_attention_specialization_breakdown.ipynb**: Enhanced with:
+  - Training pipeline for probe models across encoding bases
+  - Attention head specialization analysis with research-grade visualization
+  - MLP activation specialization analysis section
+  - Comprehensive documentation and interpretation boundaries
+
+### Changed
+
+#### Documentation
+- Updated `docs/guides/getting_started.md`:
+  - Added "Analyze Model Interpretability" section (Section 5)
+  - Enhanced "Next Steps" with complete notebook listing including interpretability analysis
+- Updated `docs/guides/training_guide.md`:
+  - Added reference to interpretability notebook in "Next Steps" section
+  - Links to attention and MLP specialization analysis
+
+### Technical Details
+- MLP analysis uses d_ff dimensions (typically 4*d_model) from linear1 output
+- Dimensions are binned into 32 bins for visualization clarity
+- All visualizations follow research-grade standards for mechanistic interpretability
+- Maintains "probe, not optimizer" philosophy with minimal training budget
+
+---
 ## [0.1.4] - 2025-01-09
 
 ### Added
@@ -177,7 +219,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 #### Dependencies
-- Updated equirements-dev.txt with observability tools
+- Updated 
+equirements-dev.txt with observability tools
   - opentelemetry-api>=1.20.0
   - opentelemetry-sdk>=1.20.0
   - opentelemetry-exporter-otlp>=1.20.0

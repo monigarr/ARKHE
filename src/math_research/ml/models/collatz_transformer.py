@@ -179,7 +179,7 @@ class CollatzTransformer(BaseSequenceModel):
         src: torch.Tensor,
         src_mask: Optional[torch.Tensor] = None,
         src_key_padding_mask: Optional[torch.Tensor] = None,
-    return_attention: bool = False,
+        return_attention: bool = False,
     ):
         """
         Forward pass through the model.
@@ -188,9 +188,10 @@ class CollatzTransformer(BaseSequenceModel):
             src: Input sequence [batch_size, seq_len]
             src_mask: Attention mask [seq_len, seq_len]
             src_key_padding_mask: Key padding mask [batch_size, seq_len]
+            return_attention: If True, returns dict with 'logits' and 'attentions'.
             
         Returns:
-            Output logits [batch_size, seq_len, vocab_size]
+            Output logits [batch_size, seq_len, vocab_size] or dict with 'logits' and 'attentions' if return_attention=True.
         """
         # Embedding
         x = self.embedding(src) * math.sqrt(self.d_model)  # [batch_size, seq_len, d_model]

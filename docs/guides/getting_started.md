@@ -91,6 +91,21 @@ See the [Training Guide](training_guide.md) for detailed instructions, or try th
 jupyter notebook src/notebooks/03_transformer_training.ipynb
 ```
 
+### 5. Analyze Model Interpretability
+
+Explore attention and MLP specialization patterns across encoding resolutions:
+
+```bash
+# Run the attention specialization analysis notebook
+jupyter notebook src/notebooks/04_attention_specialization_breakdown.ipynb
+```
+
+This notebook demonstrates:
+- Attention head specialization for rule-level features
+- MLP activation specialization via feature-conditioned variance
+- Encoding-induced collapse under symbol aliasing
+- Research-grade visualization with row normalization and collapse delta panels
+
 ## Using the CLI
 
 ### Generate Sequences
@@ -144,7 +159,11 @@ Then open your browser to `http://localhost:8501` to:
 
 ## Next Steps
 
-1. **Explore Examples**: Check out the Jupyter notebooks in `src/notebooks/`
+1. **Explore Examples**: Check out the Jupyter notebooks in `src/notebooks/`:
+   - `01_collatz_basics.ipynb` - Basic sequence generation
+   - `02_sequence_analysis.ipynb` - Statistical analysis
+   - `03_transformer_training.ipynb` - Model training
+   - `04_attention_specialization_breakdown.ipynb` - Attention and MLP interpretability analysis
 2. **Read Documentation**: See `docs/guides/` for detailed guides
 3. **API Reference**: See `docs/api/` for complete API documentation
 4. **Training Guide**: See `docs/guides/training_guide.md` for ML workflows
