@@ -179,7 +179,8 @@ class CollatzTransformer(BaseSequenceModel):
         src: torch.Tensor,
         src_mask: Optional[torch.Tensor] = None,
         src_key_padding_mask: Optional[torch.Tensor] = None,
-    ) -> torch.Tensor:
+    return_attention: bool = False,
+    ):
         """
         Forward pass through the model.
         
@@ -197,12 +198,31 @@ class CollatzTransformer(BaseSequenceModel):
         # Add positional encoding
         x = self.pos_encoder(x)
         
-        # Transformer encoder
-        x = self.transformer_encoder(x, mask=src_mask, src_key_padding_mask=src_key_padding_mask)
-        
+        # Transformer encoder with optional attention extraction
+        if return_attention:
+            attentions = []
+            for layer in self.transformer_encoder.layers:
+                attn_output, attn_weights = layer.self_attn(
+                    x, x, x,
+                    key_padding_mask=src_key_padding_mask,
+                    attn_mask=src_mask,
+                    need_weights=True,
+                    average_attn_weights=False,
+                )
+                attentions.append(attn_weights.detach())
+                x = x + layer.dropout1(attn_output)
+                x = layer.norm1(x)
+                x2 = layer.linear2(layer.dropout2(layer.activation(layer.linear1(x))))
+                x = x + layer.dropout2(x2)
+                x = layer.norm2(x)
+        else:
+            x = self.transformer_encoder(x, mask=src_mask, src_key_padding_mask=src_key_padding_mask)
+
         # Output projection
-        output = self.output_projection(x)  # [batch_size, seq_len, vocab_size]
-        
+        output = self.output_projection(x)
+
+        if return_attention:
+            return {"logits": output, "attentions": attentions}
         return output
     
     def generate(

@@ -1,34 +1,42 @@
-docs: Update documentation to reflect latest features and version 0.1.4
+feat: Enhance attention specialization analysis and add MLP specialization probes
 
-Update all user-facing documentation to include the latest enterprise
-infrastructure features and ensure version numbers are current.
+This commit significantly improves the attention specialization breakdown notebook
+and adds a new MLP activation specialization analysis.
 
-Documentation Updates:
-- Update CHANGELOG.md with version 0.1.4
-  - Document distributed tracing and enhanced observability features
-  - Document observability guide addition
-  - Document dependency updates (OpenTelemetry, Sentry)
-  - Document bug fix for RequestLogger duration check
-- Update README.md version badge from 0.1.0 to 0.1.4
-  - Reflects current project version
-- Update docs/guides/getting_started.md
-  - Add Health Check page mention in Streamlit section
-  - Add new "Observability & Monitoring" section
-  - Link to observability guide for detailed information
-  - Document health monitoring capabilities
+## Attention Analysis Improvements
 
-Files Modified:
-- CHANGELOG.md
-- README.md
-- docs/guides/getting_started.md
+- **Model Training**: Added minimal training (2 epochs) for probe models to establish
+  non-random structure while maintaining "probe, not optimizer" philosophy
+- **Row Normalization**: Implemented per-feature row normalization (each row sums to 1)
+  to make head preference visible, following standard mechanistic interpretability practices
+- **Collapse Delta Panel**: Added visual collapse delta panel showing (Base 32 - Base 8)
+  to directly demonstrate encoding-induced collapse without rhetoric
+- **Enhanced Visualization**: Improved figure with color bars, better typography, feature
+  names as y-axis labels, and summary statistics
 
-This commit ensures all documentation accurately reflects:
-- Current version (0.1.4)
-- All implemented enterprise features
-- New observability and monitoring capabilities
-- Health check functionality
-- Complete feature set for users
+## MLP Specialization Analysis (New)
 
-All documentation is now synchronized with the current state of the
-ARKHE Framework and ready for users to discover and use all available
-features.
+- **MLP Activation Extraction**: Implemented forward hooks on `encoder_layer.linear1` to
+  capture MLP activations (output before activation function)
+- **Feature-Conditioned Variance Metric**: Created `compute_mlp_specialization()` function
+  that measures variance ratio between feature-active and feature-inactive tokens
+- **Cross-Base Comparison**: Added analysis loop to compute MLP specialization across all
+  encoding bases (32, 24, 16, 8)
+- **MLP Visualization**: Created heatmap visualization with dimension binning, row
+  normalization, and collapse delta panel, using YlOrRd colormap for specialization
+  patterns
+
+## Technical Details
+
+- MLP analysis uses d_ff dimensions (typically 4*d_model) from linear1 output
+- Dimensions are binned into 32 bins for visualization
+- Specialization score = active_variance / (inactive_variance + epsilon)
+- All visualizations follow research-grade standards for mechanistic interpretability
+
+## Files Modified
+
+- `src/notebooks/04_attention_specialization_breakdown.ipynb`: Enhanced attention analysis
+  and added complete MLP specialization analysis section
+
+This work enables direct comparison between attention and MLP specialization patterns
+under encoding-induced aliasing, providing comprehensive evidence for the collapse claim.
